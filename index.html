@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Isis 💖</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 320px;
+}
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+#final {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    color: white;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2s;
+}
+.show { opacity: 1; }
+.text {
+    position: absolute;
+    font-size: 30px;
+}
+#playBtn {
+    position: absolute;
+    bottom: 80px;
+    background: #ff4d6d;
+    color: white;
+    display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="card" id="quiz">
+    <h2>Pregunta 1 💌</h2>
+    <p>¿Cuántas cartas le regalaste a tu novio?</p>
+    <button onclick="check(10)">10</button>
+    <button onclick="check(21)">21</button>
+    <button onclick="check(5)">5</button>
+</div>
+
+<div id="final">
+    <img src="foto1.jpg" class="slide" id="img1">
+    <img src="foto2.jpg" class="slide" id="img2">
+    <div class="text" id="text"></div>
+    <button id="playBtn" onclick="playMusic()">💖 Toca aquí 💖</button>
+</div>
+
+<audio id="music" preload="auto">
+    <source src="canthelp.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let step = 1;
+
+function check(ans) {
+    if (step === 1 && ans === 21) next();
+    else if (step === 2 && ans === "14abril") next();
+    else if (step === 3 && ans === "saprissa") final();
+    else alert("Intenta otra vez 😅");
+}
+
+function next() {
+    step++;
+
+    if (step === 2) {
+        document.getElementById("quiz").innerHTML = `
+        <h2>Pregunta 2 💌</h2>
+        <p>¿Cuándo cumple años tu novio?</p>
+        <button onclick="check('10marzo')">10 de marzo</button>
+        <button onclick="check('14abril')">14 de abril</button>
+        <button onclick="check('25diciembre')">25 de diciembre</button>`;
+    }
+
+    if (step === 3) {
+        document.getElementById("quiz").innerHTML = `
+        <h2>Pregunta 3 💌</h2>
+        <p>¿Cuál es su equipo favorito?</p>
+        <button onclick="check('cartago')">Cartago</button>
+        <button onclick="check('saprissa')">Saprissa</button>
+        <button onclick="check('heredia')">Heredia</button>`;
+    }
+}
+
+function final() {
+    document.getElementById("quiz").style.display = "none";
+    const f = document.getElementById("final");
+    f.style.display = "flex";
+
+    const text = document.getElementById("text");
+    const img1 = document.getElementById("img1");
+    const img2 = document.getElementById("img2");
+
+    setTimeout(() => {
+        text.innerHTML = "Isis...";
+        img1.classList.add("show");
+    }, 1000);
+
+    setTimeout(() => {
+        text.innerHTML = "Te amo pequeñita 💖";
+    }, 4000);
+
+    setTimeout(() => {
+        img2.classList.add("show");
+        text.innerHTML = "Siempre tú ❤️";
+    }, 7000);
+
+    setTimeout(() => {
+        document.getElementById("playBtn").style.display = "block";
+    }, 8000);
+}
+
+function playMusic() {
+    const music = document.getElementById("music");
+    music.play();
+}
+</script>
+
+</body>
+</html>
